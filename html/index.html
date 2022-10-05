@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+	</head>
+	<body>
+		<div id="app">
+			<a class="menu-btn" id="blink" v-on:click="toggle_mobile_menu" v-bind:class="{ active: is_active }"><span></span></a>
+			<div class="menu-window" v-bind:class="{ active: is_active }">
+				<nav class="menu">
+					<a href="#" class="menu__link">Каталог</a>
+					<a href="#" class="menu__link">Доставка</a>
+					<a href="#" class="menu__link">Оплата</a>
+					<a href="#" class="menu__link">Контакты</a>
+					<a href="#" class="menu__link">О компании</a>
+				</nav>
+			</div>
+			<header>
+				<div class="container">
+					<div class="half-1">
+						<nav class="menu">
+							<a href="#" class="menu__link">Каталог</a>
+							<a href="#" class="menu__link">Доставка</a>
+							<a href="#" class="menu__link">Оплата</a>
+							<a href="#" class="menu__link">Контакты</a>
+							<a href="#" class="menu__link">О компании</a>
+						</nav>
+					</div>
+					<div class="half-2">
+						<form action="" method="GET" class="search-form">
+							<input class="search-input" type="search" name="search-input" placeholder="Поиск по названию картины">
+							<input class="search-btn" type="submit" value="Найти">
+						</form>
+					</div>
+				</div>
+			</header>
+			<main>
+				<div class="container">
+					<h1>Картины эпохи Возрождения</h1>
+					<div class="goods-block">
+
+						<div class="good" v-for="item in items" v-bind:class="{ 'sold-in-auction': item.is_sold }">
+							<img class="pic" v-bind:src="item.img" alt="pic">
+							<div class="good-content">
+								<h2>
+									«{{ item.title }}»<br>
+									{{ item.author }}
+								</h2>
+								<div class="buy-block" v-show="item.is_sold == false">
+									<div class="price-block">
+										<div class="price-bad price-one" v-show="item.price_bad !== null">
+											{{ item.price_bad }}$
+										</div>
+										<div class="price-good price-one" v-show="item.price_good !== null">
+											{{ item.price_good }}$
+										</div>
+									</div>
+									<button class="buy-btn">Купить</button>
+								</div>
+								<div class="buy-block" v-show="item.is_sold">
+									Продана на аукционе
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</main>
+			<footer>
+				<div class="container">
+					<div class="half-1">
+						<nav class="menu">
+							<a href="#" class="menu__link">Каталог</a>
+							<a href="#" class="menu__link">Доставка</a>
+							<a href="#" class="menu__link">Оплата</a>
+							<a href="#" class="menu__link">Контакты</a>
+							<a href="#" class="menu__link">О компании</a>
+						</nav>
+					</div>
+					<div class="half-2">
+						<div class="contacts-block">
+							<div class="tel-block">
+								<a class="link" href="tel: +7 (8125) 555-555"><img src="../img/tel.png" alt="tel"> +7&nbsp;(812)&nbsp;555-55-55</a>
+							</div>
+							<div class="geogr-block">
+								<a class="link" href="https://go.2gis.com/jwezy"><img src="../img/geogr.png" alt="tel"> г. Санкт-Петербург, ул. Ефимова, 3</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		
+		<script src="../js/script.js" defer></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+	</body>
+</html>
