@@ -140,7 +140,7 @@ input::-webkit-search-results-decoration{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	margin-bottom: 320px;
+	margin-bottom: 40px;
 }
 .good{
 	width: calc(25% - 32px);

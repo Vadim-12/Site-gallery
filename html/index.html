@@ -5,13 +5,18 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
+		<title>Art Shop</title>
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 	</head>
 	<body>
 		<div id="app">
-			<a class="menu-btn" id="blink" v-on:click="toggle_mobile_menu" v-bind:class="{ active: is_active }"><span></span></a>
-			<div class="menu-window" v-bind:class="{ active: is_active }">
+			<a
+				class="menu-btn"
+				id="blink"
+				@click="toggle_mobile_menu"
+				:class="{ active: is_mobile_menu_active }">
+			<span></span></a>
+			<div class="menu-window" :class="{ active: is_mobile_menu_active }">
 				<nav class="menu">
 					<a href="#" class="menu__link">Каталог</a>
 					<a href="#" class="menu__link">Доставка</a>
@@ -32,9 +37,20 @@
 						</nav>
 					</div>
 					<div class="half-2">
-						<form action="" method="GET" class="search-form">
-							<input class="search-input" type="search" name="search-input" placeholder="Поиск по названию картины">
-							<input class="search-btn" type="submit" value="Найти">
+						<form action="" class="search-form" @submit.prevent="">
+							<input
+								class="search-input"
+								type="search"
+								v-model="query"
+								name="search-input"
+								autocomplete="off"
+								placeholder="Поиск по названию картины"
+							>
+							<button
+								@click="updateItems"
+								class="search-btn"
+								type="submit"
+							>Найти</button>
 						</form>
 					</div>
 				</div>
@@ -43,30 +59,17 @@
 				<div class="container">
 					<h1>Картины эпохи Возрождения</h1>
 					<div class="goods-block">
-
-						<div class="good" v-for="item in items" v-bind:class="{ 'sold-in-auction': item.is_sold }">
-							<img class="pic" v-bind:src="item.img" alt="pic">
-							<div class="good-content">
-								<h2>
-									«{{ item.title }}»<br>
-									{{ item.author }}
-								</h2>
-								<div class="buy-block" v-show="item.is_sold == false">
-									<div class="price-block">
-										<div class="price-bad price-one" v-show="item.price_bad !== null">
-											{{ item.price_bad }}$
-										</div>
-										<div class="price-good price-one" v-show="item.price_good !== null">
-											{{ item.price_good }}$
-										</div>
-									</div>
-									<button class="buy-btn">Купить</button>
-								</div>
-								<div class="buy-block" v-show="item.is_sold">
-									Продана на аукционе
-								</div>
-							</div>
-						</div>
+						
+						<app-good
+							:key="item.id"
+							:title="item.title"
+							:author="item.author"
+							:img_href="item.img_href"
+							:price_good="item.price_good"
+							:price_bad="item.price_bad"
+							:is_sold="item.is_sold"
+							v-for="item in showItems">
+						</app-good>
 						
 					</div>
 				</div>
@@ -96,7 +99,7 @@
 			</footer>
 		</div>
 		
-		<script src="../js/script.js" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+		<script src="../js/script.js" defer></script>
 	</body>
 </html>
