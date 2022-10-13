@@ -47,7 +47,6 @@
 								placeholder="Поиск по названию картины"
 							>
 							<button
-								@click="updateItems"
 								class="search-btn"
 								type="submit"
 							>Найти</button>
@@ -68,7 +67,7 @@
 							:price_good="item.price_good"
 							:price_bad="item.price_bad"
 							:is_sold="item.is_sold"
-							v-for="item in showItems">
+							v-for="item in queryItems">
 						</app-good>
 						
 					</div>
