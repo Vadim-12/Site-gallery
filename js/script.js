@@ -1,5 +1,5 @@
 Vue.component('app-good',{
-	props: ['title','author','img_href','price_good','price_bad','is_sold'],
+	props: ['title', 'author', 'img_href', 'price_good', 'price_bad', 'is_sold'],
 	template: `
 		<div class="good" :class="{ 'sold-in-auction': is_sold }">
 			<img class="pic" v-bind:src=img_href alt="pic">
