@@ -49,7 +49,7 @@ let app = new Vue({
 	computed: {
 		queryItems: function(){
 			console.log(this.query);
-			return this.items.filter((item) => item.title.toLowerCase().indexOf(this.query.toLowerCase()) != -1);
+			return this.items.filter((item) => item.title.toLowerCase().indexOf(this.query.toLowerCase()) !== -1);
 		}
 	}
 });
